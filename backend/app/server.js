@@ -5,6 +5,7 @@ import morgan from 'morgan';
 
 // Importing routes
 import tutorialRoutes from './routes/turorial.routes.js';
+import campusRoutes from './routes/campus.routes.js';
 
 const app = express();
 var corsOptions = {
@@ -31,11 +32,12 @@ sequelize.sync();
 
 // // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Application start point..." });
+  res.json({ message: "Application start point" });
 });
 
 // Using routes
 app.use('/api/tutorials', tutorialRoutes);
+app.use('/api/campuses', campusRoutes);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

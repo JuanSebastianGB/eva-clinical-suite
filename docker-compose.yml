@@ -20,7 +20,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     volumes:
-      - ./backend:/backend
+      - ./backend/app:/backend/app
     restart: unless-stopped
     env_file: ./.env
     ports:

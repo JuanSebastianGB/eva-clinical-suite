@@ -6,29 +6,29 @@ import {
   findOne,
   update,
   _delete
-} from '../controllers/tutorial.controller.js';
+} from '../controllers/campus.controller.js';
 import { Router } from 'express';
 const router = Router();
 
-// Create a new Tutorial
+// Create a new Campus
 router.post("/", create);
 
-// Retrieve all Tutorials
+// Retrieve all Campuses
 router.get("/", findAll);
 
-// Retrieve all published Tutorials
+// Retrieve all published Campuses
 router.get("/published", findAllPublished);
 
-// Retrieve a single Tutorial with id
+// Retrieve a single Campus with id
 router.get("/:id", findOne);
 
-// Update a Tutorial with id
+// Update a Campus with id
 router.put("/:id", update);
 
-// Delete a Tutorial with id
+// Delete a Campus with id
 router.delete("/:id", _delete);
 
-// Delete all Tutorials
+// Delete all Campuses
 router.delete("/", deleteAll);
 
 export default router;
