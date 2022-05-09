@@ -1,4 +1,4 @@
-import db from "../models";
+import db from "../models/index.js";
 const Tutorial = db.tutorials;
 const Op = db.Sequelize.Op;
 
@@ -96,7 +96,7 @@ export function update(req, res) {
 }
 
 // Delete a Tutorial with the specified id in the request
-const _delete = (req, res) => {
+export const _delete = (req, res) => {
   const id = req.params.id;
 
   Tutorial.destroy({
@@ -119,7 +119,6 @@ const _delete = (req, res) => {
       });
     });
 };
-export { _delete as delete };
 
 // Delete all Tutorials from the database.
 export function deleteAll(req, res) {

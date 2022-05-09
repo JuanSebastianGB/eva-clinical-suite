@@ -2,11 +2,14 @@ import express, { json, urlencoded } from "express";
 // const bodyParser = require("body-parser"); /* deprecated */
 import cors from "cors";
 import morgan from 'morgan';
+
+// Importing routes
 import tutorialRoutes from './routes/turorial.routes.js';
 
 const app = express();
 var corsOptions = {
-  origin: "http://localhost:8081"
+  // origin: "http://localhost:8081"
+  origin: '*'
 };
 
 app.use(cors(corsOptions));
@@ -31,8 +34,8 @@ app.get("/", (req, res) => {
   res.json({ message: "Application start point..." });
 });
 
-// require("./routes/turorial.routes").default(app);
-app.use('/', tutorialRoutes);
+// Using routes
+app.use('/api/tutorials', tutorialRoutes);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
