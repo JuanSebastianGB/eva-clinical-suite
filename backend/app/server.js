@@ -1,10 +1,10 @@
-const express = require("express");
+import express, { json, urlencoded } from "express";
 // const bodyParser = require("body-parser"); /* deprecated */
-const cors = require("cors");
-const morgan = require('morgan')
+import cors from "cors";
+import morgan from 'morgan';
+import tutorialRoutes from './routes/turorial.routes.js';
 
 const app = express();
-
 var corsOptions = {
   origin: "http://localhost:8081"
 };
@@ -12,26 +12,27 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(morgan('tiny'));
 
-// parse requests of content-type - application/json
-app.use(express.json());  /* bodyParser.json() is deprecated */
+// // parse requests of content-type - application/json
+app.use(json());  /* bodyParser.json() is deprecated */
 
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));   /* bodyParser.urlencoded() is deprecated */
+// // parse requests of content-type - application/x-www-form-urlencoded
+app.use(urlencoded({ extended: true }));   /* bodyParser.urlencoded() is deprecated */
 
-const db = require("./models");
+import { sequelize } from "./models/index.js";
 
-db.sequelize.sync();
+sequelize.sync();
 // // drop the table if it already exists
 // db.sequelize.sync({ force: true }).then(() => {
 //   console.log("Drop and re-sync db.");
 // });
 
-// simple route
+// // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Application start point..." });
 });
 
-require("./routes/turorial.routes")(app);
+// require("./routes/turorial.routes").default(app);
+app.use('/', tutorialRoutes);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

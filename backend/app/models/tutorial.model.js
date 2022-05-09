@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize) => {
+export const tutorialModel = (sequelize, Sequelize) => {
   const Tutorial = sequelize.define("tutorial", {
     title: {
       type: Sequelize.STRING

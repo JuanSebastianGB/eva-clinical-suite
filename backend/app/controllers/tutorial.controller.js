@@ -1,9 +1,9 @@
-const db = require("../models");
+import db from "../models";
 const Tutorial = db.tutorials;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Tutorial
-exports.create = (req, res) => {
+export function create(req, res) {
   // Validate request
   if (!req.body.title) {
     res.status(400).send({
@@ -30,10 +30,10 @@ exports.create = (req, res) => {
           err.message || "Some error occurred while creating the Tutorial."
       });
     });
-};
+}
 
 // Retrieve all Tutorials from the database.
-exports.findAll = (req, res) => {
+export function findAll(req, res) {
   const title = req.query.title;
   var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
@@ -47,10 +47,10 @@ exports.findAll = (req, res) => {
           err.message || "Some error occurred while retrieving tutorials."
       });
     });
-};
+}
 
 // Find a single Tutorial with an id
-exports.findOne = (req, res) => {
+export function findOne(req, res) {
   const id = req.params.id;
 
   Tutorial.findByPk(id)
@@ -68,10 +68,10 @@ exports.findOne = (req, res) => {
         message: "Error retrieving Tutorial with id=" + id
       });
     });
-};
+}
 
 // Update a Tutorial by the id in the request
-exports.update = (req, res) => {
+export function update(req, res) {
   const id = req.params.id;
 
   Tutorial.update(req.body, {
@@ -93,10 +93,10 @@ exports.update = (req, res) => {
         message: "Error updating Tutorial with id=" + id
       });
     });
-};
+}
 
 // Delete a Tutorial with the specified id in the request
-exports.delete = (req, res) => {
+const _delete = (req, res) => {
   const id = req.params.id;
 
   Tutorial.destroy({
@@ -119,9 +119,10 @@ exports.delete = (req, res) => {
       });
     });
 };
+export { _delete as delete };
 
 // Delete all Tutorials from the database.
-exports.deleteAll = (req, res) => {
+export function deleteAll(req, res) {
   Tutorial.destroy({
     where: {},
     truncate: false
@@ -135,10 +136,10 @@ exports.deleteAll = (req, res) => {
           err.message || "Some error occurred while removing all tutorials."
       });
     });
-};
+}
 
 // find all published Tutorial
-exports.findAllPublished = (req, res) => {
+export function findAllPublished(req, res) {
   Tutorial.findAll({ where: { published: true } })
     .then(data => {
       res.send(data);
@@ -149,4 +150,4 @@ exports.findAllPublished = (req, res) => {
           err.message || "Some error occurred while retrieving tutorials."
       });
     });
-};
+}
