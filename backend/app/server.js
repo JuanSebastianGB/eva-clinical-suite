@@ -1,6 +1,7 @@
 const express = require("express");
 // const bodyParser = require("body-parser"); /* deprecated */
 const cors = require("cors");
+const morgan = require('morgan')
 
 const app = express();
 
@@ -9,6 +10,7 @@ var corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(morgan('tiny'));
 
 // parse requests of content-type - application/json
 app.use(express.json());  /* bodyParser.json() is deprecated */
@@ -16,7 +18,7 @@ app.use(express.json());  /* bodyParser.json() is deprecated */
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));   /* bodyParser.urlencoded() is deprecated */
 
-const db = require("./app/models");
+const db = require("./models");
 
 db.sequelize.sync();
 // // drop the table if it already exists
@@ -26,10 +28,10 @@ db.sequelize.sync();
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Application start point..." });
 });
 
-require("./app/routes/turorial.routes")(app);
+require("./routes/turorial.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
