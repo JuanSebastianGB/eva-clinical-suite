@@ -1,35 +1,42 @@
-import {
-  DB,
-  USER,
-  PASSWORD,
-  HOST,
-  dialect as _dialect,
-  pool as _pool
-} from "../config/db.config.js";
-import Sequelize from "sequelize";
-import { tutorialModel } from './tutorial.model.js';
-import { campusModel } from "./campus.model.js";
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+const Sequelize = require('sequelize');
+const basename = path.basename(__filename);
+const env = process.env.NODE_ENV || 'development';
+
+// Setting configuration
+const config = require('../../config/database');
+const db = {};
+
+// Starting connection
+
+const sequelize = new Sequelize(
+  config.database,
+  config.username,
+  config.password,
+  config
+);
 
 
-export const sequelize = new Sequelize(DB, USER, PASSWORD, {
-  host: HOST,
-  dialect: _dialect,
-  operatorsAliases: false,
+fs
+  .readdirSync(__dirname)
+  .filter(file => {
+    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+  })
+  .forEach(file => {
+    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
+    db[model.name] = model;
+  });
 
-  pool: {
-    max: _pool.max,
-    min: _pool.min,
-    acquire: _pool.acquire,
-    idle: _pool.idle
+Object.keys(db).forEach(modelName => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
   }
 });
 
-const db = {};
-
-db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+db.Sequelize = Sequelize;
 
-db.tutorials = tutorialModel(sequelize, Sequelize);
-db.campuses = campusModel(sequelize, Sequelize);
-
-export default db;
+module.exports = db;

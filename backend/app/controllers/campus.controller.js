@@ -1,5 +1,4 @@
-import db from "../models/index.js";
-const Campus = db.campuses;
+import db, { Campus, Service } from "../models/index.js";
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Campus
@@ -35,7 +34,14 @@ export function findAll(req, res) {
   const name = req.query.name;
   var condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
 
-  Campus.findAll({ where: condition })
+  Campus.findAll({
+    where: condition,
+    attributes: ['name'],
+    include: [{
+      model: Service,
+      as: 'medical_service'
+    }]
+  })
     .then(data => {
       res.send(data);
     })
