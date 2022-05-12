@@ -9,6 +9,7 @@ import { sequelize } from "./models/index.js";
 // import tutorialRoutes from './routes/turorial.routes.js';
 import campusRoutes from './routes/campus.routes.js';
 import serviceRoutes from './routes/service.routes.js';
+import areaRoutes from './routes/area.routes.js';
 
 const app = express();
 var corsOptions = {
@@ -42,6 +43,7 @@ app.get("/", (req, res) => {
 // app.use('/api/tutorials', tutorialRoutes);
 app.use('/api/campuses', campusRoutes);
 app.use('/api/services', serviceRoutes);
+app.use('/api/areas', areaRoutes);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
