@@ -11,12 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Service.belongsTo(models.Campus, { as: 'sede', foreignKey: 'campus_id' });
-      Service.hasMany(models.Area, { as: 'areas' });
+      Service.belongsTo(models.Campus);
+      // Service.hasMany(models.Area, { as: 'areas' });
     }
   }
   Service.init({
-    name: DataTypes.STRING
+    name: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Service',

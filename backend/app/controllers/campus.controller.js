@@ -36,11 +36,12 @@ export function findAll(req, res) {
 
   Campus.findAll({
     where: condition,
-    attributes: ['name'],
     include: [{
-      model: Service,
-      as: 'medical_service'
+      model: Service
     }]
+    // include: [{
+    //   model: Service,
+    // }]
   })
     .then(data => {
       res.send(data);

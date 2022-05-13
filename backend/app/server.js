@@ -29,7 +29,7 @@ app.use(urlencoded({ extended: true }));   /* bodyParser.urlencoded() is depreca
 
 // sequelize.sync();
 // // drop the table if it already exists
-sequelize.sync({ force: false }).
+sequelize.sync({ force: true }).
   then(() => {
     console.log("Drop and re-sync db.");
   });
@@ -46,7 +46,7 @@ app.use('/api/services', serviceRoutes);
 app.use('/api/areas', areaRoutes);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

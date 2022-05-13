@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./app/server.js --exec babel-node",
-    "dev": "nodemon ./app/server.js --exec babel-node"
+    "start": "node  ./app/server.js --exec babel-node",
+    "dev": "nodemon --delay 500ms ./app/server.js --exec babel-node"
   },
   "keywords": [
     "nodejs",
