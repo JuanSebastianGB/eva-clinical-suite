@@ -2,11 +2,6 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    const campuses = [
-      { name: "Sede Principal" },
-      { name: "Sede Norte" }
-    ]
-    await queryInterface.bulkInsert('Campuses', campuses, {});
     /**
      * Add seed commands here.
      *
@@ -16,6 +11,13 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+    const areas = [
+      { name: 'Cirugia Mujeres', service_id: 2 },
+      { name: 'Cirugia Hombres', service_id: 2 },
+      { name: 'Sala Ortopedia', service_id: 2 },
+      { name: 'Neurocirugia', service_id: 2 }
+    ];
+    await queryInterface.bulkInsert('Areas', areas, {});
   },
 
   async down(queryInterface, Sequelize) {
@@ -25,6 +27,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Campuses', null, {});
+    await queryInterface.bulkDelete('Areas', null, {});
+
   }
 };

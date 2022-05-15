@@ -24,22 +24,20 @@ export const create = (req, res) => {
 
 
 export const findAll = async (req, res) => {
-  const services = await Service.findAll({
-    include: [{
-      model: Area,
-      as: 'areas'
-    }]
-  });
-  res.json({ services });
-  // try {
-  //   const services = await Service.findAll({
-  //     include: [{
-  //       model: Area,
-  //       as: 'areas'
-  //     }]
-  //   });
-  //   res.json({ services });
-  // } catch (error) {
-  //   res.json({ error: error });
-  // }
+  try {
+    const services = await Service.findAll({
+      include: [{ model: Area }]
+    });
+
+    res.json({ services })
+  } catch (error) {
+    res
+      .status(500)
+      .json({
+        message: error.message || "Something went wrong when trying to find all campuses"
+      });
+  }
+
 }
+
+

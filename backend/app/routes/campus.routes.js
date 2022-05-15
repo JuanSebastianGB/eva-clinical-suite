@@ -10,22 +10,127 @@ import {
 import { Router } from 'express';
 const router = Router();
 
-// Create a new Campus
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Campus:
+ *      type: object
+ *      properties:
+ *        name:
+ *          type: string
+ *          description: The campus name
+ *      required:
+ *        - name
+ *      example:
+ *        name: Sede principal
+ */
+
+/**
+ * @swagger
+ * /api/campuses:
+ *  post:
+ *    summary: Create a new Campus
+ *    tags: [Campus]
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            $ref: '#/components/schemas/Campus'
+ *    responses:
+ *      200:
+ *        description: new campus created
+ */
 router.post("/", create);
-
-// Retrieve all Campuses
+/**
+ * @swagger
+ * /api/campuses:
+ *  get:
+ *    summary: return all Campuses
+ *    tags: [Campus]
+ *    responses:
+ *      200:
+ *        description: all users
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                $ref: '#components/schemas/Campus'
+ */
 router.get("/", findAll);
-
-// Retrieve all published Campuses
-router.get("/published", findAllPublished);
-
-// Retrieve a single Campus with id
+/**
+ * @swagger
+ * /api/campuses/{id}:
+ *  get:
+ *    summary: return one campus
+ *    tags: [Campus]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: the campus id
+ *    responses:
+ *      200:
+ *        description: one user
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              $ref: '#components/schemas/Campus'
+ *    404:
+ *      description: campus not found
+ */
 router.get("/:id", findOne);
-
-// Update a Campus with id
+/**
+ * @swagger
+ * /api/campuses/{id}:
+ *  put:
+ *    summary: update a campus
+ *    tags: [Campus]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: the campus id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            $ref: '#/components/schemas/Campus'
+ *    responses:
+ *      200:
+ *        description: campus updated
+ *      400:
+ *        cannot be updated
+ *      500:
+ *        something went wrong
+ */
 router.put("/:id", update);
-
-// Delete a Campus with id
+/**
+ * @swagger
+ * /api/campuses/{id}:
+ *  delete:
+ *    summary: delete a campus
+ *    tags: [Campus]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: the campus id
+ *    404:
+ *      description: campus not found
+ */
 router.delete("/:id", _delete);
 
 // Delete all Campuses

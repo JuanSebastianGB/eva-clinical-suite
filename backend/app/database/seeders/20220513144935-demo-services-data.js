@@ -5,23 +5,23 @@ module.exports = {
     const services = [
       {
         name: "Urgencias",
-        campusId: 1
+        campus_id: 1
       },
       {
         name: "Hospitalizacion cirugia",
-        campusId: 1
+        campus_id: 1
       },
       {
         name: "Sala de operaciones",
-        campusId: 1
+        campus_id: 1
       },
       {
         name: "Imagenes diagnosticas",
-        campusId: 1
+        campus_id: 1
       },
       {
         name: "Oftalmologia",
-        campusId: 1
+        campus_id: 1
       },
     ]
     await queryInterface.bulkInsert('Services', services, {});
@@ -43,5 +43,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    await queryInterface.bulkDelete('Services', null, {});
+
   }
 };

@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // Area.belongsTo(models.Service, { as: 'service', foreignKey: 'service_id' });
+      Area.belongsTo(models.Service, {
+        foreignKey: 'service_id'
+      });
     }
   }
   Area.init({

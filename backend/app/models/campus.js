@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Campus.hasMany(models.Service);
+      Campus.hasMany(models.Service, {
+        foreignKey: 'campus_id'
+      });
     }
   }
   Campus.init({
