@@ -16,7 +16,7 @@ export const options = {
 
         servers: [
             {
-                url: "http://localhost:5000",
+                url: `${process.env.URL || 'http://localhost'}:${process.env.PORT || 5000}`,
                 description: "Eva clinical suit API Documentation",
             },
         ],
