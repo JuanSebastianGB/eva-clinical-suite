@@ -22,22 +22,26 @@ export const create = (req, res) => {
     });
 }
 
-
 export const findAll = async (req, res) => {
   try {
     const services = await Service.findAll({
       include: [{ model: Area }]
     });
-
-    res.json({ services })
+    if (services)
+      res
+        .status(200)
+        .json({ services });
+    res
+      .status(404)
+      .json({
+        message: `Cannot find services`
+      });
   } catch (error) {
     res
       .status(500)
       .json({
-        message: error.message || "Something went wrong when trying to find all campuses"
+        message: error.message || "Something went wrong when trying to find all services"
       });
   }
-
 }
-
 
