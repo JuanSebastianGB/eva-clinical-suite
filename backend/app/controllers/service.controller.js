@@ -1,25 +1,31 @@
 import { Service, Area } from '../models/index';
 
-export const create = (req, res) => {
-  if (!req.body.name) {
-    res.status(400).send({
-      message: "Content can't be empty"
-    });
-    return;
-  }
-  const service = {
-    name: req.body.name,
-    campus_id: req.body.campus_id
-  };
-  Service.create(service)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: err.message || "Some errror ocurred in the creation of the service"
+export const create = async (req, res) => {
+  try {
+    const { name, campus_id } = req.body;
+    if (!name)
+      res
+        .status(400)
+        .json({
+          message: {
+            error: "Must have a name"
+          }
+        });
+    const service = {
+      name,
+      campus_id
+    }
+    const createdService = await Service.create(service);
+    res
+      .status(200)
+      .json({ message: 'Service created successfully', createdService })
+  } catch (error) {
+    res
+      .status(500)
+      .json({
+        message: error.message || "Some error occurred while creating the Service"
       });
-    });
+  }
 }
 
 export const findAll = async (req, res) => {
@@ -45,3 +51,80 @@ export const findAll = async (req, res) => {
   }
 }
 
+export const findOne = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const service = await Service.findByPk(id);
+    if (service)
+      res
+        .status(200)
+        .json({ service });
+    res
+      .status(404)
+      .json({
+        message: `Cannot find Service with id=${id}`
+      });
+  } catch (error) {
+    res
+      .status(500)
+      .json({
+        message: error.message || `Error retrieving Service with id= ${id}`
+      });
+  }
+}
+
+export const update = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const service = await Service.update(req.body, {
+      where: { id }
+    });
+    console.log(service);
+    if (service != 0) {
+      console.log('cero');
+
+      res
+        .status(200)
+        .json({ message: `Service with id=${id} updated successfully` });
+    }
+    else {
+      console.log('diferetne');
+
+      res
+        .status(400)
+        .json({
+          message: `Cannot update Service with id=${id}`
+        });
+    }
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({
+        message: error.message || `Error updating Service with id= ${id}`
+      });
+  }
+}
+
+export const _delete = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const service = await Service.destroy({ where: { id } });
+    if (service === 1)
+      res
+        .status(200)
+        .json({ message: `Service with id=${id} Deleted successfully` });
+    res
+      .status(400)
+      .json({
+        message: `Cannot delete Service with id=${id}. Maybe Service was not found!`
+      });
+  } catch (error) {
+    res
+      .status(500)
+      .json({
+        message: error.message || `Error deleting Service with id=${id}`
+      });
+  }
+
+}
