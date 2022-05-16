@@ -76,7 +76,7 @@ router.get("/", findAll);
  *        description: the campus id
  *    responses:
  *      200:
- *        description: one user
+ *        description: one campus
  *        content:
  *          application/json:
  *            schema:
