@@ -1,7 +1,6 @@
 .sidebar {
   flex: 1;
-  border: .5px solid rgb(228, 225, 225);
-
+  border: 0.5px solid rgb(228, 225, 225);
 
   .top {
     height: 50px;
@@ -17,13 +16,12 @@
   }
 
   hr {
-    border: .5px solid rgb(228, 225, 225);
+    border: 0.5px solid rgb(228, 225, 225);
   }
 
   .center {
     min-height: 100vh;
     padding-left: 15px;
-
 
     ul {
       list-style: none;
@@ -38,7 +36,7 @@
         font-weight: bold;
         color: #999;
         margin-bottom: 5px;
-        margin-top: 15px
+        margin-top: 15px;
       }
 
       li {
