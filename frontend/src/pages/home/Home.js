@@ -1,5 +1,6 @@
-import Chart from '../../components/chart/Chart';
-import Featured from '../../components/featured/Featured';
+/* import Chart from '../../components/chart/Chart';
+import Featured from '../../components/featured/Featured'; */
+import DefaultTable from '../../components/defaultTable/DefaultTable';
 import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Widget from '../../components/widget/Widget';
@@ -17,8 +18,12 @@ const Home = () => {
 					<Widget type='earning' />
 				</div>
 				<div className='charts'>
-					<Featured />
-					<Chart title='Last 6 Months (Revenue)' aspect={2 / 1} />
+					{/* 					<Featured />
+					<Chart title='Last 6 Months (Revenue)' aspect={2 / 1} /> */}
+				</div>
+				<div className='listContainer'>
+					<div className='listTitle'>Latest Transactions</div>
+					<DefaultTable />
 				</div>
 			</div>
 		</div>
