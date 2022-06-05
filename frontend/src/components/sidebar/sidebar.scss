@@ -1,0 +1,27 @@
+.sidebar {
+  flex: 1;
+
+  .top {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: rgba(66, 54, 77, 0.133)
+    }
+  }
+
+  .center {
+    min-height: 100vh;
+    background-color: #3242;
+    display: flex;
+    justify-content: space-between;
+
+    li {
+      list-style: none;
+    }
+  }
+}
