@@ -11,6 +11,7 @@ import BookOutlinedIcon from '@mui/icons-material/BookOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import PeopleOutlineOutlinedIcon from '@mui/icons-material/PeopleOutlineOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import { Link } from 'react-router-dom';
 const Sidebar = () => {
 	return (
 		<div className='sidebar'>
@@ -21,19 +22,25 @@ const Sidebar = () => {
 			<div className='center'>
 				<ul>
 					<p className='title'>MAIN</p>
-					<li>
-						<DashboardIcon className='icon' />
-						<span>Dashboard</span>
-					</li>
+					<Link to='/' style={{ textDecoration: 'none' }}>
+						<li>
+							<DashboardIcon className='icon' />
+							<span>Dashboard</span>
+						</li>
+					</Link>
 					<p className='title'>LISTS</p>
-					<li>
-						<PersonOutlineIcon className='icon' />
-						<span>Users</span>
-					</li>
-					<li>
-						<ProductionQuantityLimitsOutlinedIcon className='icon' />
-						<span>Products</span>
-					</li>
+					<Link to='/users' style={{ textDecoration: 'none' }}>
+						<li>
+							<PersonOutlineIcon className='icon' />
+							<span>Users</span>
+						</li>
+					</Link>
+					<Link to='/products' style={{ textDecoration: 'none' }}>
+						<li>
+							<ProductionQuantityLimitsOutlinedIcon className='icon' />
+							<span>Products</span>
+						</li>
+					</Link>
 					<li>
 						<ListAltOutlinedIcon className='icon' />
 						<span>Orders</span>
