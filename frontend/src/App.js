@@ -4,7 +4,7 @@ import Login from './pages/login/Login';
 import Single from './pages/single/Single';
 import New from './pages/new/New';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { userInputs } from './sourceForm';
+import { productInputs, userInputs } from './sourceForm';
 
 function App() {
   return (
@@ -24,7 +24,10 @@ function App() {
           <Route path='products'>
             <Route index element={<List />}></Route>
             <Route path=':productId' element={<Single />}></Route>
-            <Route path='new' element={<New />}></Route>
+            <Route
+              path='new'
+              element={<New inputs={productInputs} title='Add New Product' />}
+            ></Route>
           </Route>
         </Routes>
       </BrowserRouter>
