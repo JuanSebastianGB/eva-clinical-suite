@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState('');
-  console.log(title);
   return (
     <div className='new'>
       <Sidebar />
